@@ -3,7 +3,20 @@
 
 using namespace std;
 
+void caesar_encrypt(string message, int shift){
 
+	int len = message.length();
+
+	for (int i = 0; i < len; i++){
+		message[i] += shift;
+		// ensures letters wrap back around
+		if (message[i] > 122)
+			message[i] -= 26;
+	}
+
+	cout << "Encoded text: " << message;
+	cout << endl << endl;
+}
 
 int main(){
 
@@ -31,20 +44,23 @@ int main(){
                         cin >> shift;
                         cout << endl;
 
+                        cout << "Enter message (no spaces): ";
+                        cin >> message;
+			for (int i = 0; i < message.length(); i++){
+				message[i] = tolower(message[i]);
+			}
+                        cout << endl;
+
                         cout << "Encrypt or decrypt? (e/d)" << endl;
                         cin >> option;
                         cout << endl;
 
-                        cout << "Enter message (no spaces): ";
-                        cin >> message;
-                        cout << endl;
-
                         if(option == "e" || option == "E"){
-                                cout << " e ";
+                                caesar_encrypt(message, shift);
                         } else if(option == "d" || option == "D"){
                                 cout << " d ";
                         } else{
-                                cout << "ERROR: NOT A VALID OPTION";
+                                cout << "ERROR: NOT A VALID OPTION" << endl << endl;
                         }
                 }
         }
