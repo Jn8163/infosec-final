@@ -18,6 +18,21 @@ void caesar_encrypt(string message, int shift){
 	cout << endl << endl;
 }
 
+void caesar_decrypt(string message, int shift){
+
+	int len = message.length();
+
+	for (int i = 0; i < len; i++){
+		message[i] -= shift;
+
+		if (message[i] < 97)
+			message[i] += 26;
+	}
+
+	cout << "Decoded text: " << message;
+	cout << endl << endl;
+}
+
 int main(){
 
         int input = -1;
@@ -58,7 +73,7 @@ int main(){
                         if(option == "e" || option == "E"){
                                 caesar_encrypt(message, shift);
                         } else if(option == "d" || option == "D"){
-                                cout << " d ";
+                                caesar_decrypt(message, shift);
                         } else{
                                 cout << "ERROR: NOT A VALID OPTION" << endl << endl;
                         }
