@@ -33,6 +33,14 @@ void caesar_decrypt(string message, int shift){
 	cout << endl << endl;
 }
 
+void vigenere_encrypt(string message, string key, char arr[][26]){
+
+}
+
+void vigenere_decrypt(string message, string key, char arr[][26]){
+
+}
+
 int main(){
 
         int input = -1;
@@ -41,6 +49,7 @@ int main(){
         string message = "";
 
 	char vigenere_arr[26][26];
+	string key = "";
 
 	// constructs array
 	for (int i = 0; i < 26; i++){
@@ -94,6 +103,39 @@ int main(){
                                 cout << "ERROR: NOT A VALID OPTION" << endl << endl;
                         }
                 }
+
+		// Vigenere
+		if(input == 2){
+			cout << "Enter your message (no spaces): ";
+			cin >> message;
+			for (int i = 0; i < message.length(); i++){
+				message[i] = tolower(message[i]);
+			}
+                        cout << endl;
+
+			while(key.length() != message.length()){
+				cout << "Enter a key (must match the character length of the message): ";
+				cin >> key;
+				cout << endl << endl;
+
+				if(key.length() != message.length())
+					cout << "ERROR: KEY AND MESSAGE LENGTHS DO NOT MATCH" << endl << endl;
+			}
+
+			cout << "Encrypt or decrypt? (e/d)" << endl;
+                        cin >> option;
+                        cout << endl;
+
+                        if(option == "e" || option == "E"){
+                                vigenere_encrypt(message, key, vigenere_arr);
+                        } else if(option == "d" || option == "D"){
+                                vigenere_decrypt(message, key, vigenere_arr);
+                        } else{
+                                cout << "ERROR: NOT A VALID OPTION" << endl << endl;
+                        }
+		}
+
+
         }
         return 0;
 }
