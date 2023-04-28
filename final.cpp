@@ -40,6 +40,22 @@ int main(){
         string option = "";
         string message = "";
 
+	char vigenere_arr[26][26];
+
+	// constructs array
+	for (int i = 0; i < 26; i++){
+		for (int j = 0; j < 26; j++){
+			vigenere_arr[i][j] = 'A' + i + j;
+			while (vigenere_arr[i][j] > 90)
+				vigenere_arr[i][j] -= 26;
+
+			vigenere_arr[i][j] = tolower(vigenere_arr[i][j]);
+
+			cout << vigenere_arr[i][j] << " ";
+		}
+		cout << endl;
+	}
+
         while(input != 0){
 
                 cout << "     CHOOSE A CIPHER     " << endl;
