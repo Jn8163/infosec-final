@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 void caesar_encrypt(string message, int shift){
 
 	int len = message.length();
@@ -35,6 +36,24 @@ void caesar_decrypt(string message, int shift){
 
 void vigenere_encrypt(string message, string key, char arr[][26]){
 
+	int len = message.length();
+
+	int index1 = 0;
+	int index2 = 0;
+	char new_message[len];
+
+	cout << "New message: ";
+
+	for (int i = 0; i < len; i++){
+		index1 = message[i] - 97;
+		index2 = key[i] - 97;
+
+		new_message[i] = arr[index1][index2];
+		cout << new_message[i];
+	}
+
+	cout << endl << endl;
+
 }
 
 void vigenere_decrypt(string message, string key, char arr[][26]){
@@ -60,9 +79,9 @@ int main(){
 
 			vigenere_arr[i][j] = tolower(vigenere_arr[i][j]);
 
-			cout << vigenere_arr[i][j] << " ";
+//			cout << vigenere_arr[i][j] << " ";
 		}
-		cout << endl;
+//		cout << endl;
 	}
 
         while(input != 0){
@@ -116,6 +135,9 @@ int main(){
 			while(key.length() != message.length()){
 				cout << "Enter a key (must match the character length of the message): ";
 				cin >> key;
+				for (int i = 0; i < key.length(); i++){
+					key[i] = tolower(key[i]);
+				}
 				cout << endl << endl;
 
 				if(key.length() != message.length())
