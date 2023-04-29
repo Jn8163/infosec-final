@@ -42,7 +42,7 @@ void vigenere_encrypt(string message, string key, char arr[][26]){
 	int index2 = 0;
 	char new_message[len];
 
-	cout << "New message: ";
+	cout << "Encrypted text: ";
 
 	for (int i = 0; i < len; i++){
 		index1 = message[i] - 97;
@@ -57,6 +57,26 @@ void vigenere_encrypt(string message, string key, char arr[][26]){
 }
 
 void vigenere_decrypt(string message, string key, char arr[][26]){
+
+	int len = message.length();
+
+	int index1 = 0;
+	int index2 = 0;
+	char new_message[len];
+
+	cout << "Decrypted text: ";
+
+	for (int i = 0; i < len; i++){
+		index1 = key[i] - 97;
+		index2 = message[i] - 97;
+
+		for(int j = 0; j < 26; j++){
+			if(arr[index1][j] == message[i])
+				cout << arr[0][j];
+		}
+	}
+
+	cout << endl << endl;
 
 }
 
