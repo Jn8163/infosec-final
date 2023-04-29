@@ -82,6 +82,37 @@ void vigenere_decrypt(string message, string key, char arr[][26]){
 
 void columnar_encrypt(string message, int height, int width){
 
+	char arr[height][width];
+	int counter = 0;
+
+	int len = message.length();
+
+	// creates grid
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+			if(counter >= len){
+				arr[i][j] = ' ';
+				cout << arr[i][j] << " ";
+			}
+			else{
+				arr[i][j] = message[counter];
+				cout << arr[i][j] << " ";
+			}
+
+			counter++;
+		}
+		cout << endl;
+	}
+
+	// encryption loop (goes from bottom left to top right of grid)
+	for(int j = 0; j < width; j++){
+		for(int i = height - 1; i >= 0; i--){
+			if(arr[i][j] != ' ')
+				cout << arr[i][j];
+
+		}
+	}
+	cout << endl;
 }
 
 void columnar_decrypt(string message, int height, int width){
@@ -199,13 +230,13 @@ int main(){
 			cin >> width;
 			cout << endl;
 
-			cout << "Enter message (only accepts a maximum of " << width * height << " characters): ";
-			cin >> message;
-			cout << endl;
-
 			cout << "Encrypt or decrypt? (e/d)" << endl;
                         cin >> option;
                         cout << endl;
+
+			cout << "Enter message (only accepts a maximum of " << width * height << " characters, no spaces): ";
+			cin >> message;
+			cout << endl;
 
                         if(option == "e" || option == "E"){
                                 columnar_encrypt(message, height, width);
