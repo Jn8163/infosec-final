@@ -80,6 +80,14 @@ void vigenere_decrypt(string message, string key, char arr[][26]){
 
 }
 
+void columnar_encrypt(string message, int height, int width){
+
+}
+
+void columnar_decrypt(string message, int height, int width){
+
+}
+
 int main(){
 
         int input = -1;
@@ -104,12 +112,16 @@ int main(){
 //		cout << endl;
 	}
 
+	int height;
+	int width;
+
         while(input != 0){
 
                 cout << "     CHOOSE A CIPHER     " << endl;
                 cout << "-------------------------" << endl;
                 cout << "1. Caesar" << endl;
                 cout << "2. Vigenere" << endl;
+		cout << "3. Columnar Transposition" << endl;
                 cout << "0. Exit" << endl << endl;
 
                 cout << "Enter value here: ";
@@ -177,6 +189,33 @@ int main(){
                         }
 		}
 
+		// Columnar Transposition
+		if(input == 3){
+			cout << "Enter grid height: ";
+			cin >> height;
+			cout << endl;
+
+			cout << "Enter grid width: ";
+			cin >> width;
+			cout << endl;
+
+			cout << "Enter message (only accepts a maximum of " << width * height << " characters): ";
+			cin >> message;
+			cout << endl;
+
+			cout << "Encrypt or decrypt? (e/d)" << endl;
+                        cin >> option;
+                        cout << endl;
+
+                        if(option == "e" || option == "E"){
+                                columnar_encrypt(message, height, width);
+                        } else if(option == "d" || option == "D"){
+                                columnar_decrypt(message, height, width);
+                        } else{
+                                cout << "ERROR: NOT A VALID OPTION" << endl << endl;
+                        }
+
+		}
 
         }
         return 0;
