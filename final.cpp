@@ -1,8 +1,11 @@
-#include <iostream>
-#include <string>
+//#include <iostream>
+//#include <string>
+//#include <map>
+#include<bits/stdc++.h>
 
 using namespace std;
 
+map<int, int> keyMap;
 
 void caesar_encrypt(string message, int shift){
 
@@ -80,12 +83,27 @@ void vigenere_decrypt(string message, string key, char arr[][26]){
 
 }
 
-void columnar_encrypt(string message, int height, int width){
+void keyAssign(string key){
+
+}
+
+void columnar_encrypt(string message, string key){
+
+	for(int i = 0; i < key.length(); i++){
+		keyMap[key[i]] = i; // permutates key map
+	}
+
+	string text = "";
+	int len = message.length();
+	int width = key.length();
+	int height = len/width;
+	int j;
+
+	if(len % width != 0)
+		height++;
 
 	char arr[height][width];
 	int counter = 0;
-
-	int len = message.length();
 
 	// creates grid
 	for(int i = 0; i < height; i++){
@@ -101,22 +119,48 @@ void columnar_encrypt(string message, int height, int width){
 
 			counter++;
 		}
-		cout << endl;
+		cout << endl << endl;
 	}
 
+	for(map<int,int>::iterator ii = keyMap.begin(); ii != keyMap.end(); ++ii){
+		j=ii->second;
+		for(int i = 0; i < height; i++){
+	//		cout << arr[i][j];
+			text += arr[i][j];
+		}
+		cout << endl;
+	}
+	cout << text;
+
 	// encryption loop (goes from bottom left to top right of grid)
-	for(int j = 0; j < width; j++){
+/*	for(int j = 0; j < width; j++){
 		for(int i = height - 1; i >= 0; i--){
 			if(arr[i][j] != ' ')
 				cout << arr[i][j];
 
 		}
-	}
+	}*/
 	cout << endl;
 }
 
-void columnar_decrypt(string message, int height, int width){
+void columnar_decrypt(string message, string key){
+/*
+	char arr[height][width];
+	int counter = 0;
 
+	int len = message.length();
+
+	// creates grid
+	for(int j = 0; j < width; j++){
+		for(int i = 0; i < height; i++){
+			if(arr[i][j] == ' ')
+				i = height;
+			else
+				cout << arr[i][j];
+		}
+
+	}
+*/
 }
 
 int main(){
@@ -143,8 +187,6 @@ int main(){
 //		cout << endl;
 	}
 
-	int height;
-	int width;
 
         while(input != 0){
 
@@ -222,26 +264,22 @@ int main(){
 
 		// Columnar Transposition
 		if(input == 3){
-			cout << "Enter grid height: ";
-			cin >> height;
-			cout << endl;
-
-			cout << "Enter grid width: ";
-			cin >> width;
+			cout << "Enter key: ";
+			cin >> key;
 			cout << endl;
 
 			cout << "Encrypt or decrypt? (e/d)" << endl;
                         cin >> option;
                         cout << endl;
 
-			cout << "Enter message (only accepts a maximum of " << width * height << " characters, no spaces): ";
+			cout << "Enter message (no spaces): ";
 			cin >> message;
 			cout << endl;
 
                         if(option == "e" || option == "E"){
-                                columnar_encrypt(message, height, width);
+                                columnar_encrypt(message, key);
                         } else if(option == "d" || option == "D"){
-                                columnar_decrypt(message, height, width);
+                                columnar_decrypt(message, key);
                         } else{
                                 cout << "ERROR: NOT A VALID OPTION" << endl << endl;
                         }
