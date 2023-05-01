@@ -109,7 +109,7 @@ void columnar_encrypt(string message, string key){
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
 			if(counter >= len){
-				arr[i][j] = ' ';
+				arr[i][j] = 'X';
 				cout << arr[i][j] << " ";
 			}
 			else{
@@ -144,23 +144,60 @@ void columnar_encrypt(string message, string key){
 }
 
 void columnar_decrypt(string message, string key){
-/*
-	char arr[height][width];
-	int counter = 0;
+
+	for(int i = 0; i < key.length(); i++){
+		keyMap[key[i]] = i; // permutates key map
+	}
 
 	int len = message.length();
+	int width = key.length();
+	int height = len/width;
+	int tmp = 0;
+
+	if(len % width != 0)
+		height++;
+
+	char arr[height][width];
+	int counter = 0;
 
 	// creates grid
 	for(int j = 0; j < width; j++){
 		for(int i = 0; i < height; i++){
-			if(arr[i][j] == ' ')
-				i = height;
-			else
-				cout << arr[i][j];
-		}
+			if(counter >= len){
+				arr[i][j] = ' ';
+				cout << arr[i][j] << " ";
+			}
+			else{
+				arr[i][j] = message[counter];
+				cout << arr[i][j] << " ";
+			}
 
+			counter++;
+		}
+		cout << endl << endl;
 	}
-*/
+
+	for(map<int,int>::iterator ii = keyMap.begin(); ii != keyMap.end(); ++ii){
+		ii->second = tmp++;
+	}
+
+	char matrix[height][width];
+	map<int,int>::iterator ii = keyMap.begin();
+	tmp = 0;
+	for(int l = 0, j = 0; key[l] != '\0'; tmp++){
+		j = keyMap[key[l++]];
+		for(int i = 0; i < height; i++){
+			matrix[i][tmp] = arr[i][j];
+		}
+	}
+
+	// printer
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+			cout << matrix[i][j];
+		}
+	}
+	cout << endl;
 }
 
 int main(){
