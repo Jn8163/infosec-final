@@ -5,7 +5,7 @@
 
 using namespace std;
 
-map<int, int> keyMap;
+map<int, int> keyMap; // for columnar encryption
 
 void caesar_encrypt(string message, int shift){
 
@@ -83,10 +83,6 @@ void vigenere_decrypt(string message, string key, char arr[][26]){
 
 }
 
-void keyAssign(string key){
-
-}
-
 void columnar_encrypt(string message, string key){
 
 	for(int i = 0; i < key.length(); i++){
@@ -125,21 +121,12 @@ void columnar_encrypt(string message, string key){
 	for(map<int,int>::iterator ii = keyMap.begin(); ii != keyMap.end(); ++ii){
 		j=ii->second;
 		for(int i = 0; i < height; i++){
-	//		cout << arr[i][j];
 			text += arr[i][j];
 		}
 		cout << endl;
 	}
 	cout << text;
 
-	// encryption loop (goes from bottom left to top right of grid)
-/*	for(int j = 0; j < width; j++){
-		for(int i = height - 1; i >= 0; i--){
-			if(arr[i][j] != ' ')
-				cout << arr[i][j];
-
-		}
-	}*/
 	cout << endl;
 }
 
@@ -219,9 +206,7 @@ int main(){
 
 			vigenere_arr[i][j] = tolower(vigenere_arr[i][j]);
 
-//			cout << vigenere_arr[i][j] << " ";
 		}
-//		cout << endl;
 	}
 
 
